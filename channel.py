@@ -4,6 +4,9 @@ import datetime
 from flask import Flask, request, render_template, jsonify
 import json
 import requests
+import re
+import random # for Eliza-style responses
+from flask import Flask, url_for
 
 # Class-based application configuration
 class ConfigClass(object):
@@ -108,20 +111,61 @@ def save_messages(messages):
     with open(CHANNEL_FILE, 'w') as f:
         json.dump(messages, f)
 
+def send_picture(image_url):
+    # Placeholder function to simulate sending a picture
+    print(f"Sending picture: {image_url}")
+
 def reply(message):
-    # Check if the message contains "hi"
-    
-    if "hi" in message['content'].lower():
-        # Send a message from "bot" into the channel with the text "HI!"
-        bot_message = {
-            "content": "HI!",
-            "sender": "bot",
-            "timestamp":  datetime.datetime.now().isoformat()# assuming you imported datetime
-        }
-        # Add the bot's message to the channel
-        messages = read_messages()
-        messages.append(bot_message)
-        save_messages(messages)
+
+    # Define Eliza-style patterns and responses
+    eliza_patterns = [
+        (r'hello|hi|hey', ['Hello!', 'Hi there!', 'Greetings!']),
+        (r'how are you', ['I am just a bot, but thanks for asking!']),
+        (r'your name', ['I am a chatbot, you can call me Chatty.']),
+        (r'weather', ['I do not have a window, but it always feels sunny in this digital world.']),
+        (r'joke|funny', ['Why did the computer go to therapy? It had too many bytes of emotional baggage!']),
+        (r'love', ['Love is a complex emotion, even for bots. What is on your mind?']),
+        (r'favorite color', ['I see in binary, so it is all shades of 0s and 1s to me.']),
+        (r'color', ['I will have to ask Mary about that.']),
+        (r'platypus', ['Wait, I think I have something for you!']),
+        # Add more patterns and responses as needed
+    ]
+
+    # Check if any pattern matches the message content
+    for pattern, responses in eliza_patterns:
+        if re.search(pattern, message['content'], re.IGNORECASE):
+
+            # Select a random response from the matched pattern
+            response = random.choice(responses)
+
+            # Send a message from "bot" into the channel with the selected response
+            bot_message = {
+                "content": response,
+                "sender": "bot",
+                "timestamp": datetime.datetime.now().isoformat()
+            }
+            if 'platypus' in pattern.lower():
+                # Replace this with the actual URL of the picture you want to send
+                image_url = '/static/perry.png'
+                send_picture(image_url)
+            
+            # Add the bot's message to the channel
+            messages = read_messages()
+            messages.append(bot_message)
+            save_messages(messages)
+            return
+
+    # If no patterns match, send a generic response
+    generic_response = "I'm not sure how to respond to that. How can I help you?"
+    bot_message = {
+        "content": generic_response,
+        "sender": "bot",
+        "timestamp": datetime.datetime.now().isoformat()
+    }
+    messages = read_messages()
+    messages.append(bot_message)
+    save_messages(messages)
+    return
 
 # Start development web server
 if __name__ == '__main__':
