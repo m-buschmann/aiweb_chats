@@ -129,6 +129,7 @@ def send_picture(image_url):
 def reply(message):
 
     # Define Eliza-style patterns and responses
+    #TODO: alternative responses for random picking
     eliza_patterns = [
         (r'hello|hi|hey', ['Hello!', 'Hi there!', 'Greetings!']),
         (r'how are you', ['I am just a bot, but thanks for asking!']),
