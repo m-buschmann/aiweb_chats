@@ -1,6 +1,6 @@
 ## channel.py - a simple message channel
 ##
-
+import datetime
 from flask import Flask, request, render_template, jsonify
 import json
 import requests
@@ -85,6 +85,9 @@ def send_message():
     messages = read_messages()
     messages.append({'content':message['content'], 'sender':message['sender'], 'timestamp':message['timestamp']})
     save_messages(messages)
+
+    # call reply here 
+    reply(message)
     return "OK", 200
 
 def read_messages():
@@ -104,6 +107,21 @@ def save_messages(messages):
     global CHANNEL_FILE
     with open(CHANNEL_FILE, 'w') as f:
         json.dump(messages, f)
+
+def reply(message):
+    # Check if the message contains "hi"
+    
+    if "hi" in message['content'].lower():
+        # Send a message from "bot" into the channel with the text "HI!"
+        bot_message = {
+            "content": "HI!",
+            "sender": "bot",
+            "timestamp":  datetime.datetime.now().isoformat()# assuming you imported datetime
+        }
+        # Add the bot's message to the channel
+        messages = read_messages()
+        messages.append(bot_message)
+        save_messages(messages)
 
 # Start development web server
 if __name__ == '__main__':
