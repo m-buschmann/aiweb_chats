@@ -88,6 +88,15 @@ def send_message():
     # add message to messages
     messages = read_messages()
     messages.append(message)
+    bot_message = {
+                "content": "You always wanted to know how a Platypus sounds like, right?",
+                "sender": "bot",
+                "timestamp": datetime.datetime.now().isoformat()
+            }
+            
+    # Add the bot's message to the channel
+    messages = read_messages()
+    messages.append(bot_message)
     audio_response = generate_audio_response()
     messages.append(audio_response)
     save_messages(messages)
