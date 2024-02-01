@@ -1,9 +1,13 @@
 ## channel.py - a simple message channel
 ##
 
+import datetime
 from flask import Flask, request, render_template, jsonify
 import json
 import requests
+import re
+import random # for Eliza-style responses
+from flask import Flask, send_from_directory, url_for
 
 # Class-based application configuration
 class ConfigClass(object):
@@ -83,7 +87,8 @@ def send_message():
         return "No timestamp", 400
     # add message to messages
     messages = read_messages()
-    messages.append({'content':message['content'], 'sender':message['sender'], 'timestamp':message['timestamp']})
+    audio_response = generate_audio_response(message)
+    messages.append(audio_response)
     save_messages(messages)
     return "OK", 200
 
@@ -104,6 +109,47 @@ def save_messages(messages):
     global CHANNEL_FILE
     with open(CHANNEL_FILE, 'w') as f:
         json.dump(messages, f)
+
+@app.route('/audio/<filename>')
+def send_audio(filename):
+    return send_from_directory('static', filename)
+
+# In your message handling logic
+def generate_audio_response(message):
+    audio_file = url_for('send_audio', filename='judypus.mp3')
+    return {
+        "content": audio_file,
+        "type": "audio",
+        "sender": "bot",
+        "timestamp": datetime.datetime.now().isoformat()
+    }
+
+"""def reply(message):
+    # Check if the message contains "hi"
+    
+    if "hi" in message['content'].lower():
+        # Send a message from "bot" into the channel with the text "HI!"
+        bot_message = {
+            "content": "HI!",
+            "sender": "bot",
+            "timestamp":  datetime.datetime.now().isoformat()# assuming you imported datetime
+        }
+        # Add the bot's message to the channel
+        messages = read_messages()
+        messages.append(bot_message)
+        save_messages(messages)
+
+    # If no patterns match, send a generic response
+    generic_response = "I'm not sure how to respond to that. How can I help you?"
+    bot_message = {
+        "content": generic_response,
+        "sender": "bot",
+        "timestamp": datetime.datetime.now().isoformat()
+    }
+    messages = read_messages()
+    messages.append(bot_message)
+    save_messages(messages)
+    return"""
 
 # Start development web server
 if __name__ == '__main__':

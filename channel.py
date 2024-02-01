@@ -6,7 +6,7 @@ import json
 import requests
 import re
 import random # for Eliza-style responses
-from flask import Flask, url_for
+from flask import Flask
 
 # Class-based application configuration
 class ConfigClass(object):

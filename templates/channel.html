@@ -99,6 +99,12 @@
             background-color: #555;
         }
     </style>
+    <script>
+        function playAudio(url) {
+            var audioPlayer = new Audio(url);
+            audioPlayer.play();
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -118,6 +124,9 @@
                         {% if message.type == "image" %}
                             <!-- Display the image -->
                             <img src="{{ message.content }}" alt="Image from {{ message.sender }}" class="message-image">
+                        {% elif message.type == "audio" %}
+                            <!-- Display an audio control -->
+                            <button onclick="playAudio('{{ message.content }}')">Play Audio</button>
                         {% else %}
                             <!-- Display the text message -->
                             <p>{{ message.content }}</p>
