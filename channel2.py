@@ -1,9 +1,13 @@
 ## channel.py - a simple message channel
 ##
 
+import datetime
 from flask import Flask, request, render_template, jsonify
 import json
 import requests
+import re
+import random # for Eliza-style responses
+from flask import Flask, send_from_directory, url_for
 
 # Class-based application configuration
 class ConfigClass(object):
@@ -20,9 +24,9 @@ app.app_context().push()  # create an app context before initializing db
 HUB_URL = 'http://localhost:5555'
 HUB_AUTHKEY = '1234567890'
 CHANNEL_AUTHKEY = '22334455'
-CHANNEL_NAME = "The Lousy Channel"
+CHANNEL_NAME = "The Noisy Channel"
 CHANNEL_ENDPOINT = "http://localhost:5002"
-CHANNEL_FILE = 'messages.json'
+CHANNEL_FILE = 'messages2.json'
 
 @app.cli.command('register')
 def register_command():
@@ -83,7 +87,18 @@ def send_message():
         return "No timestamp", 400
     # add message to messages
     messages = read_messages()
-    messages.append({'content':message['content'], 'sender':message['sender'], 'timestamp':message['timestamp']})
+    messages.append(message)
+    bot_message = {
+                "content": "You always wanted to know how a Platypus sounds like, right?",
+                "sender": "bot",
+                "timestamp": datetime.datetime.now().isoformat()
+            }
+            
+    # Add the bot's message to the channel
+    messages = read_messages()
+    messages.append(bot_message)
+    audio_response = generate_audio_response()
+    messages.append(audio_response)
     save_messages(messages)
     return "OK", 200
 
@@ -104,6 +119,22 @@ def save_messages(messages):
     global CHANNEL_FILE
     with open(CHANNEL_FILE, 'w') as f:
         json.dump(messages, f)
+
+@app.route('/static/<filename>')
+def send_audio(filename):
+    return send_from_directory('static', filename)
+
+# In your message handling logic
+def generate_audio_response():
+    audio_file = url_for('send_audio', filename='judypus.mp3')
+    print(audio_file)
+    return {
+        "content": audio_file,
+        "type": "audio",
+        "sender": "bot",
+        "timestamp": datetime.datetime.now().isoformat()
+    }
+
 
 # Start development web server
 if __name__ == '__main__':
