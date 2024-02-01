@@ -101,9 +101,10 @@
     </style>
     <script>
         function playAudio(url) {
-            var audioPlayer = new Audio(url);
-            audioPlayer.play();
-        }
+        console.log("Playing audio from URL:", url);  // Log the URL to the console
+        var audioPlayer = new Audio(url);
+        audioPlayer.play().catch(e => console.error("Error playing audio:", e));
+    }
     </script>
 </head>
 <body>

@@ -113,7 +113,6 @@ def save_messages(messages):
 
 def send_picture(image_url):
     # This function should send the image URL to the client.
-
     image_message = {
         "content": image_url,
         "sender": "bot",
