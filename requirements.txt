@@ -1,6 +1,5 @@
 flask
 flask-sqlalchemy
 requests
-random 
-re
 flask
+datetime

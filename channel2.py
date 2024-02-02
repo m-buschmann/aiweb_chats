@@ -5,8 +5,6 @@ import datetime
 from flask import Flask, request, render_template, jsonify
 import json
 import requests
-import re
-import random # for Eliza-style responses
 from flask import Flask, send_from_directory, url_for
 
 # Class-based application configuration
