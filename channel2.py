@@ -24,7 +24,7 @@ HUB_AUTHKEY = 'Crr-K3d-2N'
 
 CHANNEL_AUTHKEY = '22334455'
 CHANNEL_NAME = "The Noisy Channel"
-CHANNEL_ENDPOINT = "http://localhost:5002"
+CHANNEL_ENDPOINT = "http://vm954.rz.uni-osnabrueck.de/user031/channel2"
 CHANNEL_FILE = 'messages2.json'
 
 @app.cli.command('register')
