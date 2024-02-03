@@ -34,7 +34,7 @@ def home_page():
     return render_template("home.html", channels=update_channels())
 
 
-@app.route('/user031/client.wsgi/show')
+@app.route('/show')
 def show_channel():
     # fetch list of messages from channel
     show_channel = request.args.get('channel', None)
