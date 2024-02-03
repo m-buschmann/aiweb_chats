@@ -96,6 +96,7 @@ def send_message():
     # Add the bot's message to the channel
     messages = read_messages()
     messages.append(bot_message)
+    save_messages(messages)
     audio_response = generate_audio_response()
     messages.append(audio_response)
     save_messages(messages)
