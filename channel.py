@@ -173,11 +173,11 @@ def reply(message):
             save_messages(messages)
 
             if 'platypus' in pattern.lower():
-                image_url = '/platy.png'
-                send_picture(image_url)
+                image_name = '/platy.png'
+                send_picture(image_name)
             if 'unicorn' in pattern.lower():
-                image_url = '/unicorn.png'
-                send_picture(image_url)
+                image_name = '/unicorn.png'
+                send_picture(image_name)
             return
 
     # If no patterns match, send a generic response
