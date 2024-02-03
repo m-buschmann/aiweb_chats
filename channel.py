@@ -196,4 +196,4 @@ def reply(message):
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
 
-#/show?channel={{ channel.endpoint | urlencode }}
+#/show?channel={{ channel.endpoint | urlencode }} ausgetauscht durch url_for in client.py, lass es nur hier falls wir es noch mal brauchen
