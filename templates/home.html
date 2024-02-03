@@ -87,7 +87,7 @@
 
             <ul>
                 {% for channel in channels %}
-                    <li><a href="{{ url_for('show', channel=channel.endpoint) }}">{{ channel.name }}</a></li>
+                    <li><a href="{{ url_for('user031/channel2.wsgi/show', channel=channel.endpoint) }}">{{ channel.name }}</a></li>
                 {% endfor %}
             </ul>
         </article>
