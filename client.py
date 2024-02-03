@@ -51,7 +51,7 @@ def show_channel():
     if response.status_code != 200:
         return "Error fetching messages: "+str(response.text), 400
     messages = response.json()
-    return render_template("channel.html", channel=channel, messages=messages)
+    return render_template("channel.html", channels=channel, messages=messages)
 
 
 @app.route('/post', methods=['POST'])
