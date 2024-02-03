@@ -76,7 +76,7 @@ def post_message():
     if response.status_code != 200:
         return "Error posting message: "+str(response.text), 400
     #return redirect(url_for('show_channel')+'?channel='+urllib.parse.quote(post_channel))
-    return redirect('/user031/client.wsgi/' + url_for('show_channel', channel=urllib.parse.quote(post_channel)))
+    return redirect(url_for('show_channel', channel=urllib.parse.quote(post_channel)))
 
 
 
