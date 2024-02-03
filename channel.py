@@ -25,7 +25,7 @@ HUB_AUTHKEY = 'Crr-K3d-2N'
 
 CHANNEL_AUTHKEY = '0987654321'
 CHANNEL_NAME = "The One for ELIZA"
-CHANNEL_ENDPOINT = "/channel.wsgi" # don't forget to adjust in the bottom of the file
+CHANNEL_ENDPOINT = "http://vm954.rz.uni-osnabrueck.de/user031/channel.wsgi" # don't forget to adjust in the bottom of the file
 CHANNEL_FILE = 'messages.json'
 
 @app.cli.command('register')
