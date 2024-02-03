@@ -36,7 +36,7 @@ app.app_context().push()  # create an app context before initializing db
 db.init_app(app)  # initialize database
 db.create_all()  # create database if necessary
 
-SERVER_AUTHKEY = 'Crr-K3d-2N'
+SERVER_AUTHKEY = '1234567890'
 
 
 
