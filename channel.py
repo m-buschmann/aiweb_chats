@@ -1,7 +1,7 @@
 ## channel.py - a simple message channel
 ##
 import datetime
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, url_for
 import json
 import requests
 import re
@@ -112,7 +112,8 @@ def save_messages(messages):
     with open(CHANNEL_FILE, 'w') as f:
         json.dump(messages, f)
 
-def send_picture(image_url):
+def send_picture(image_name):
+    image_url = url_for('static', filename=image_name)
     # This function should send the image URL to the client.
     image_message = {
         "content": image_url,
@@ -172,12 +173,10 @@ def reply(message):
             save_messages(messages)
 
             if 'platypus' in pattern.lower():
-                # Replace this with the actual URL of the picture you want to send
-                image_url = '/static/platy.png'
+                image_url = '/platy.png'
                 send_picture(image_url)
             if 'unicorn' in pattern.lower():
-                # Replace this with the actual URL of the picture you want to send
-                image_url = '/static/unicorn.png'
+                image_url = '/unicorn.png'
                 send_picture(image_url)
             return
 
