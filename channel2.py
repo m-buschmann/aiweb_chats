@@ -22,9 +22,9 @@ app.app_context().push()  # create an app context before initializing db
 HUB_URL = 'https://temporary-server.de'
 HUB_AUTHKEY = 'Crr-K3d-2N'
 
-CHANNEL_AUTHKEY = '22334455'
+CHANNEL_AUTHKEY = 'Crr-K3d-2N'
 CHANNEL_NAME = "The Noisy Channel"
-CHANNEL_ENDPOINT = "http://localhost:5002"
+CHANNEL_ENDPOINT = "https://temporary-server.de"
 CHANNEL_FILE = 'messages2.json'
 
 @app.cli.command('register')
