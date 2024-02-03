@@ -137,4 +137,4 @@ def generate_audio_response():
 
 # Start development web server
 if __name__ == '__main__':
-    app.run(port="user031/channel2.wsgi", debug=True)
+    app.run(port="http://vm954.rz.uni-osnabrueck.de/user031/channel2.wsgi", debug=True)
