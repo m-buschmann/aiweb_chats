@@ -20,8 +20,9 @@ app = Flask(__name__)
 app.config.from_object(__name__ + '.ConfigClass')  # configuration
 app.app_context().push()  # create an app context before initializing db
 
-HUB_URL = 'http://localhost:5555'
-HUB_AUTHKEY = '1234567890'
+HUB_URL = 'https://temporary-server.de'
+HUB_AUTHKEY = 'Crr-K3d-2N'
+
 CHANNEL_AUTHKEY = '0987654321'
 CHANNEL_NAME = "The One for ELIZA"
 CHANNEL_ENDPOINT = "http://localhost:5001" # don't forget to adjust in the bottom of the file
