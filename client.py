@@ -34,7 +34,7 @@ def home_page():
     return render_template("home.html", channels=update_channels())
 
 
-@app.route('/show')
+@app.route('/user031/client.wsgi/show')
 def show_channel():
     # fetch list of messages from channel
     show_channel = request.args.get('channel', None)
@@ -51,7 +51,7 @@ def show_channel():
     if response.status_code != 200:
         return "Error fetching messages: "+str(response.text), 400
     messages = response.json()
-    return render_template("channel.html", channels=channel, messages=messages)
+    return render_template("channel.html", channel=channel, messages=messages)
 
 
 @app.route('/post', methods=['POST'])
