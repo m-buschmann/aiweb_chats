@@ -87,6 +87,7 @@ def send_message():
     # add message to messages
     messages = read_messages()
     messages.append(message)
+    save_messages(messages)
     bot_message = {
                 "content": "You always wanted to know how a Platypus sounds like, right?",
                 "sender": "bot",
@@ -94,7 +95,6 @@ def send_message():
             }
             
     # Add the bot's message to the channel
-    messages = read_messages()
     messages.append(bot_message)
     save_messages(messages)
     audio_response = generate_audio_response()
@@ -127,7 +127,6 @@ def send_audio(filename):
 # In your message handling logic
 def generate_audio_response():
     audio_file = url_for('send_audio', filename='judypus.mp3')
-    print(audio_file)
     return {
         "content": audio_file,
         "type": "audio",
