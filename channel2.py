@@ -89,7 +89,7 @@ def send_message():
     messages.append(message)
     save_messages(messages)
     bot_message = {
-                "content": "You always wanted to know how a Platypus sounds like, right?",
+                "content": "You always wanted to know how a platypus sounds like, right?",
                 "sender": "bot",
                 "timestamp": datetime.datetime.now().isoformat()
             }
