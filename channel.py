@@ -150,6 +150,7 @@ def reply(message):
         (r'food|eat', ['If I could eat, I\'d probably like bytes and chips.']),
         (r'movie|film', ['Movies are a great way to unwind.', 'What type of movies do you like?', 'I would suggest going to the Sneak Peek on Mondays!']),
         (r'bye|goodbye|quit', ['Goodbye!', 'Bye!', 'Have a nice day!']),
+        (r'(.*\?)', ['Sorry, I can\'t answer that.', 'I\'m not sure. What do you think?']),
         (r'(.*)', ['Tell me more!', 'Why do you say that?', 'I see.', 'Very interesting.', 'I see. And what does that tell you?', 'How does that make you feel?'])
     ]
 
