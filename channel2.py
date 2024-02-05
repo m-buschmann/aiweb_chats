@@ -88,15 +88,15 @@ def send_message():
     messages = read_messages()
     messages.append(message)
     save_messages(messages)
+    # Add a bot message
     bot_message = {
                 "content": "You always wanted to know how a platypus sounds like, right?",
                 "sender": "bot",
                 "timestamp": datetime.datetime.now().isoformat()
             }
-            
-    # Add the bot's message to the channel
     messages.append(bot_message)
     save_messages(messages)
+    # Send audio response
     audio_response = generate_audio_response()
     messages.append(audio_response)
     save_messages(messages)
@@ -122,10 +122,12 @@ def save_messages(messages):
 
 @app.route('/static/<filename>')
 def send_audio(filename):
+    """Send static files from the static directory."""
     return send_from_directory('static', filename)
 
 # In your message handling logic
 def generate_audio_response():
+    """Generate a response with an audio file."""
     audio_file = url_for('send_audio', filename='judypus.mp3')
     return {
         "content": audio_file,

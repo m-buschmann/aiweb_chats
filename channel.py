@@ -113,13 +113,14 @@ def save_messages(messages):
         json.dump(messages, f)
 
 def send_picture(image_name):
+    """Send a picture to the client."""
     image_url = url_for('static', filename=image_name)
     # This function should send the image URL to the client.
     image_message = {
         "content": image_url,
         "sender": "bot",
         "timestamp": datetime.datetime.now().isoformat(),
-        "type": "image"  # This new field indicates the type of message
+        "type": "image"  # This field indicates the type of message
     }
 
     messages = read_messages()
@@ -128,7 +129,7 @@ def send_picture(image_name):
 
 
 def reply(message):
-    #TODO: alternative responses for random picking
+    """Answer to the user's message with a response from Eliza-style patterns."""
     eliza_patterns = [
         (r'hello|hi|hey', ['Hello!', 'Hi there!', 'Greetings!']),
         (r'what\'s up|what is up', ['Not much, just chatting with you!', 'The sky usually! But here in the digital world, it\'s just code.']),
@@ -196,5 +197,3 @@ def reply(message):
 # Start development web server
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
-
-#/show?channel={{ channel.endpoint | urlencode }} ausgetauscht durch url_for in home.html, lass es nur hier falls wir es noch mal brauchen
