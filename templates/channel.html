@@ -25,6 +25,17 @@
             padding-top: 30px;
             min-height: 70px;
             border-bottom: #bbb 1px solid;
+            display: flex;
+            align-items: center;
+        }
+        header h1 {
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 img {
+            height: 50px; /* Adjust size as needed */
+            margin-right: 10px; /* Adjust spacing as needed */
         }
 
         header a {
@@ -110,7 +121,10 @@
 <body>
     <header>
         <div class="container">
-            <h1><a href="{{ url_for('home_page') }}">Chatypus</a></h1>
+            <h1>
+                <img src="{{ url_for('static', filename='mascot.png') }}" alt="Chatypus Logo">
+                <a href="{{ url_for('home_page') }}">Chatypus</a>
+            </h1>
         </div>
     </header>
 
