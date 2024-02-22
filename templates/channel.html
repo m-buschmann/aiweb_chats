@@ -117,12 +117,36 @@
         }
 
     </style>
+
     <script>
         function playAudio(url) {
         console.log("Playing audio from URL:", url);  // Log the URL to the console
         var audioPlayer = new Audio(url);
         audioPlayer.play().catch(e => console.error("Error playing audio:", e));
     }
+        
+    window.onload = function() { // function to change the color of the username 
+            var usernames = document.querySelectorAll(".username"); //find all elements with the class username
+
+            usernames.forEach(element => { //for each element with the class username
+                const hue = (element.innerHTML); // all the text in the element
+                var sum = 0;
+
+                for (var i = 0; i < hue.length; i++) { 
+                    //for each character in the text, add the unicode value to the sum if the sum is even, subtract if it is odd
+                    //this will give different colors for reversed usernames
+                    if (sum % 2 == 0){
+                        sum += hue.charCodeAt(i); 
+                    } else {
+                        sum -= hue.charCodeAt(i);
+                    }
+                    
+                }
+
+                element.style.color = `hsl(${sum %360}, 71%, 73%)`; //set the color of the element as a hsl value
+                });
+        };
+
     </script>
 </head>
 <body>
@@ -142,7 +166,9 @@
 
                 {% for message in messages %}
                     <div class="message">
-                        <h2>{{ message.sender }}</h2>
+                        
+                        <h2 class="username">{{ message.sender }}</h2>
+
                         {% if message.type == "image" %}
                             <!-- Display the image -->
                             <img src="{{ message.content }}" alt="Image from {{ message.sender }}" class="message-image">
