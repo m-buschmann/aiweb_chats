@@ -126,9 +126,9 @@
     }
         
     window.onload = function() {
-            var bot_messages = document.querySelectorAll(".message");
+            var usernames = document.querySelectorAll(".username");
 
-            bot_messages.forEach(element => {
+            usernames.forEach(element => {
                 var hue = (element.innerHTML);
                 var sum = 0;
 
@@ -160,7 +160,7 @@
                 {% for message in messages %}
                     <div class="message">
                         
-                        <h2 class="message">{{ message.sender }}</h2>
+                        <h2 class="username">{{ message.sender }}</h2>
 
                         {% if message.type == "image" %}
                             <!-- Display the image -->
