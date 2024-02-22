@@ -131,6 +131,7 @@ def send_picture(image_name):
 def reply(message):
     """Answer to the user's message with a response from Eliza-style patterns."""
     eliza_patterns = [
+        (r'what\'s the answer to everything|what is the answer to everything', ['42 of course!', 'The answer to the ultimate question of life, the universe, and everything is 42.']),
         (r'hello|hi|hey', ['Hello!', 'Hi there!', 'Greetings!', 'Hello World!']),
         (r'what\'s up|what is up', ['Not much, just chatting with you!', 'The sky usually! But here in the digital world, it\'s just code.']),
         (r'how are you', ['I am just a bot, but thanks for asking!']),
@@ -151,7 +152,6 @@ def reply(message):
         (r'food|eat', ['If I could eat, I\'d probably like bytes and chips.']),
         (r'movie|film', ['Movies are a great way to unwind.', 'What type of movies do you like?', 'I would suggest going to the Sneak Peek on Mondays!']),
         (r'bye|goodbye|quit', ['Goodbye!', 'Bye!', 'Have a nice day!']),
-        (r'what\'s the answer to everything|what is the answer to everything', ['42 of course!', 'The answer to the ultimate question of life, the universe, and everything is 42.']),
         (r'(.*\?)', ['Sorry, I can\'t answer that.', 'I\'m not sure. What do you think?']),
         (r'(.*)', ['Tell me more!', 'Why do you say that?', 'I see.', 'Very interesting.', 'I see. And what does that tell you?', 'How does that make you feel?'])
     ]
