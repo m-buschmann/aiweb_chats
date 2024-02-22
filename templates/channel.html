@@ -133,7 +133,12 @@
                 var sum = 0;
 
                 for (var i = 0; i < hue.length; i++) {
-                    sum += hue.charCodeAt(i);
+                    if (sum % 2 == 0){
+                        sum += hue.charCodeAt(i);
+                    } else {
+                        sum -= hue.charCodeAt(i);
+                    }
+                    
                 }
 
                 element.style.color = `hsl(${sum %360}, 71%, 73%)`;
