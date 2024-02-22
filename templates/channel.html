@@ -117,12 +117,29 @@
         }
 
     </style>
+
     <script>
         function playAudio(url) {
         console.log("Playing audio from URL:", url);  // Log the URL to the console
         var audioPlayer = new Audio(url);
         audioPlayer.play().catch(e => console.error("Error playing audio:", e));
     }
+        
+    window.onload = function() {
+            var bot_messages = document.querySelectorAll(".message");
+
+            bot_messages.forEach(element => {
+                var hue = (element.innerHTML);
+                var sum = 0;
+
+                for (var i = 0; i < hue.length; i++) {
+                    sum += hue.charCodeAt(i);
+                }
+
+                element.style.color = `hsl(${sum %360}, 71%, 73%)`;
+                });
+        };
+
     </script>
 </head>
 <body>
@@ -142,7 +159,9 @@
 
                 {% for message in messages %}
                     <div class="message">
-                        <h2>{{ message.sender }}</h2>
+                        
+                        <h2 class="message">{{ message.sender }}</h2>
+
                         {% if message.type == "image" %}
                             <!-- Display the image -->
                             <img src="{{ message.content }}" alt="Image from {{ message.sender }}" class="message-image">
